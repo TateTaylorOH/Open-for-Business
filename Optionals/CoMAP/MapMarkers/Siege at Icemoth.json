@@ -1,0 +1,20 @@
+{
+  "mapMarkers": [
+    {
+      "refID": "Siege at Icemoth.esp|C366B", // Frostcaller Cave (Original Marker: Cave)
+      "iconName": "GlacialCaveMarker"
+    },
+    {
+      "refID": "Siege at Icemoth.esp|34BE2E", // Rimewind Grotto (Original Marker: Cave)
+      "iconName": "GlacialCaveMarker"
+    },
+    {
+      "refID": "Siege at Icemoth.esp|1E10C0", // Eyndis' Folly (Original Marker: Shipwreck)
+      "iconName": "ActualShipwreckMarker"
+    },
+    {
+      "refID": "Siege at Icemoth.esp|B0AD0", // Wreck of The Northern Grace (Original Marker: Shipwreck)
+      "iconName": "ActualShipwreckMarker"
+    }
+  ]
+}

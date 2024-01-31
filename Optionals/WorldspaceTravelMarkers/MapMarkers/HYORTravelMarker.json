@@ -1,0 +1,12 @@
+{
+  "mapMarkers": [
+    {
+      "refID": "HYORTravelMarker.esp|800", // Hjorkvild Isles (Worldspace Change)
+      "iconName": "TravelIconNWMarker"
+    },
+    {
+      "refID": "HYORTravelMarker.esp|801", // Skyrim (Worldspace Change)
+      "iconName": "TravelIconSEMarker"
+    }
+  ]
+}

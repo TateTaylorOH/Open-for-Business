@@ -40,6 +40,8 @@ ObjectReference myJehannaBanner
 ObjectReference myImperialBanner
 ObjectReference myEastEmpireCompanyBanner
 
+Actor Property IcemothQuartermasterJehanna auto
+
 Event OnLoad()
 	EastEmpireCompany = LCO.EastEmpireCompany()
 	parent.OnLoad()
@@ -109,6 +111,12 @@ function updateBanners(int i = -1)
 		myJehannaBanner.enableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
+		IF thisLocation == HYORFortIcemothLocation 
+			ImportJehannaQuartermaster()
+		ENDIF
+		IF (Game.GetFormFromFile(0x0183C, "LCO_IliacBay.esp") as GlobalVariable).GetValue() < 1
+			(Game.GetFormFromFile(0x0183C, "LCO_IliacBay.esp") as GlobalVariable).SetValue(1)
+		ENDIF
 	elseif(i == LCO.Imperial())
 		IF thisLocation == HYORFortIcemothLocation 
 			DisableIcemothBoss()
@@ -145,4 +153,14 @@ function EnableIcemothBoss()
 	Silas.Enable()
 	SilasMinion.Enable()
 	WatcherMarker.Enable()
+endFunction
+
+function ImportJehannaQuartermaster()
+IF IcemothQuartermasterJehanna.GetItemCount(Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp")) < 1
+	IcemothQuartermasterJehanna.AddItem(Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp"), 1)
+	IcemothQuartermasterJehanna.EquipItem(Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp"))
+ENDIF
+IF !IcemothQuartermasterJehanna.IsInFaction(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction)
+	IcemothQuartermasterJehanna.AddToFaction(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction)
+ENDIF
 endFunction

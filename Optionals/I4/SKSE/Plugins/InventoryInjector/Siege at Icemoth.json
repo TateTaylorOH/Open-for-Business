@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Exit-9B/InventoryInjector/main/docs/InventoryInjector.schema.json",
+  "rules": [
+    {
+      "match": {
+        "formType": "MiscItem",
+        "formId": "Siege at Icemoth.esp|0xC3662"
+      },
+      "assign": {
+        "subType": "DragonClaw"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "formId": "Siege at Icemoth.esp|0xDBBC0"
+        }
+      "assign": {
+        "subType": "weapon_quarterstaff"
+      }
+    }
+  ]
+}

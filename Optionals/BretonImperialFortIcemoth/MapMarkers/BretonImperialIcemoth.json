@@ -1,0 +1,8 @@
+{
+  "mapMarkers": [
+    {
+      "refID": "Siege at Icemoth.esp|0x4CCBB", // Fort Icemoth (Original Marker: Fort)
+      "iconName": "BorderCrossingMarker"
+    }
+  ]
+}
