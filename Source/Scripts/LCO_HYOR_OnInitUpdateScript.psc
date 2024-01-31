@@ -1,22 +1,9 @@
 Scriptname LCO_HYOR_OnInitUpdateScript extends Quest  
 {Controls patchless integration with LCO_IliacBay. This is a unique controller, do NOT reuse this script generically.}
 
-GlobalVariable Property LCO_HYOR_IBInstalled  Auto  
-LeveledActor Property LCO_IB_LCharJehannaGuardFacesDummy auto
-LeveledActor Property LCO_IB_LCharJehannaGuardCaptainDummy auto
-LeveledItem Property LCO_HYOR_JehannaItems auto
-LeveledItem Property LCO_HYOR_EECItems auto
-ObjectReference Property LCO_IcemothControlMarkerJehanna auto
-Keyword Property LocationChangeOwnershipEvent auto
-Location Property HYORFortIcemothLocation auto
-
-int GuardFormsAdded = 0
-int CaptainFormsAdded = 0
-bool EECInjected = false
-
 EVENT OnInit()
-	;Debug.Notification("OnInit() fired.")
-	LCO_HYORUpdater()	
+    ;Debug.Notification("OnInit() fired.")
+    LCO_HYORUpdater()	
 ENDEVENT
 
 Function LCO_HYORUpdater()
@@ -26,7 +13,19 @@ Function LCO_HYORUpdater()
     ;Debug.Notification("LCO_HYORUpdater() finished.")
 EndFunction
 
-;Jehanna Support
+;-- Jehanna Support ---------------------------------------
+
+GlobalVariable Property LCO_HYOR_IBInstalled  Auto
+Keyword Property LocationChangeOwnershipEvent auto
+LeveledActor Property LCO_IB_LCharJehannaGuardCaptainDummy auto
+LeveledActor Property LCO_IB_LCharJehannaGuardFacesDummy auto
+LeveledItem Property LCO_HYOR_JehannaItems auto
+Location Property HYORFortIcemothLocation auto
+ObjectReference Property LCO_IcemothControlMarkerJehanna auto
+
+int CaptainFormsAdded = 0
+int GuardFormsAdded = 0
+
 Function EnableJehannaClaims()
 	if Game.GetFormFromFile(0x082D, "LCO_IliacBay.esp") as bool && LCO_HYOR_IBInstalled.GetValue() <= 0 ;checks to see if LCO_IliacyBay.esp is installed
 		LCO_HYOR_IBInstalled.SetValue(1) ;sets a global to confirm it is installed, allowing for Jehanna claims
@@ -69,7 +68,12 @@ Function InjectJehannaItems()
 	LCO_HYOR_JehannaItems.AddForm(Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp"), 1, 1)
 EndFunction
 
-;East Empire Company Armor Support
+;-- East Empire Company Armor Support ---------------------------------------
+
+LeveledItem Property LCO_HYOR_EECItems auto
+
+bool EECInjected = false
+
 Function InjectEECItems()
 	IF Game.GetFormFromFile(0x0801, "EastEmpireCompanyArmor.esp") as bool && EECInjected == false
 		LCO_HYOR_EECItems.AddForm(Game.GetFormFromFile(0x0801, "EastEmpireCompanyArmor.esp"), 1, 1)
