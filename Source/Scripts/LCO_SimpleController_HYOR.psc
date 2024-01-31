@@ -169,7 +169,8 @@ endFunction
 
 function setEECNeutral()
 	IF thisLocation == HYORFortIcemothLocation 
-		TG04EastEmpireFaction.SetEnemy(ClaimableFactions, true, true)
+		TG04EastEmpireFaction.SetEnemy(ClaimableFactions[0], true, true)
+		TG04EastEmpireFaction.SetEnemy(ClaimableFactions[1], true, true)
 		TG04EastEmpireFaction.SetEnemy((Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction), true, true)
 	ENDIF
 endFunction
