@@ -16,8 +16,7 @@ bool EECInjected = false
 
 EVENT OnInit()
 	;Debug.Notification("OnInit() fired.")
-	LCO_HYORUpdater()
-	
+	LCO_HYORUpdater()	
 ENDEVENT
 
 Function LCO_HYORUpdater()
