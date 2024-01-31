@@ -1,5 +1,5 @@
 Scriptname LCO_HYOR_OnInitUpdateScript extends Quest  
-{Controls patchless integration with LCO_IliacBay. This is a unique controller, do NOT reuse this script generically.}
+{Controls patchless integration. This is a unique controller, do NOT reuse this script generically. If you are interested in adding claims for Jehanna it is recommended to simply master LCO_IliacBay.esp to your file.}
 
 EVENT OnInit()
     ;Debug.Notification("OnInit() fired.")
