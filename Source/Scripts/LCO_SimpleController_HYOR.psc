@@ -99,7 +99,7 @@ function updateBanners(int i = -1)
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
 		setEastEmpireNeutral() ;Exclusive function for Fort Icemoth
-		setEastEmpireAlly(ClaimableFactions[0]) ;Exclusive function for Fort Icemoth
+		setEastEmpireAlly(ClaimableFactions[1]) ;Exclusive function for Fort Icemoth
 	elseif(i == LCO.Player())
 		myDefaultBanner.disableNoWait()
 		DisableIcemothBoss() ;Exclusive function for Fort Icemoth
@@ -118,7 +118,7 @@ function updateBanners(int i = -1)
 		myImperialBanner.enableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
 		setEastEmpireNeutral() ;Exclusive function for Fort Icemoth
-		setEastEmpireAlly(ClaimableFactions[1]) ;Exclusive function for Fort Icemoth
+		setEastEmpireAlly(ClaimableFactions[2]) ;Exclusive function for Fort Icemoth
 	elseif(i == LCO.EastEmpireCompany())
 		myDefaultBanner.disableNoWait()
 		DisableIcemothBoss() ;Exclusive function for Fort Icemoth
