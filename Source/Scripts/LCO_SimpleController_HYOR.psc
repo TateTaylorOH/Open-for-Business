@@ -90,7 +90,7 @@ function updateBanners(int i = -1)
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
-		setEECNeutral(ClaimableFactions)
+		setEECNeutral()
 	elseif(i == LCO.LocalHold())
 		myDefaultBanner.disableNoWait()
 		DisableIcemothBoss()
@@ -98,7 +98,7 @@ function updateBanners(int i = -1)
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
-		setEECNeutral(ClaimableFactions)
+		setEECNeutral()
 		setEECAlly(ClaimableFactions[1])
 	elseif(i == LCO.Player())
 		myDefaultBanner.disableNoWait()
@@ -108,7 +108,7 @@ function updateBanners(int i = -1)
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
 		ImportJehannaQuartermaster() ;Will make Jehanna Guard's Armor craftable after claiming a location. The rest of the function is Fort Icemoth exclusive.	
-		setEECNeutral(ClaimableFactions)
+		setEECNeutral()
 		setEECAlly(ClaimableFactions[2])
 	elseif(i == LCO.Imperial())
 		myDefaultBanner.disableNoWait()
@@ -117,7 +117,7 @@ function updateBanners(int i = -1)
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.enableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
-		setEECNeutral(ClaimableFactions)
+		setEECNeutral()
 		setEECAlly(ClaimableFactions[3])
 	elseif(i == LCO.EastEmpireCompany())
 		myDefaultBanner.disableNoWait()
@@ -126,7 +126,7 @@ function updateBanners(int i = -1)
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.enableNoWait()
-		setEECNeutral(ClaimableFactions)
+		setEECNeutral()
 	endIf
 endFunction
 
@@ -167,9 +167,9 @@ function setEECAlly(faction ClaimedFaction)
 	ENDIF
 endFunction
 
-function setEECNeutral(faction ClaimedFaction)
+function setEECNeutral()
 	IF thisLocation == HYORFortIcemothLocation 
-		TG04EastEmpireFaction.SetEnemy(ClaimedFaction, true, true)
+		TG04EastEmpireFaction.SetEnemy(ClaimableFactions)
 	ENDIF
 endFunction
 
