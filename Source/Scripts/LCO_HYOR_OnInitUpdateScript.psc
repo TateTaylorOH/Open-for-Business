@@ -81,7 +81,7 @@ Function InjectEECItems()
 		LCO_HYOR_EECItems.AddForm(Game.GetFormFromFile(0x0809, "EastEmpireCompanyArmor.esp"), 1, 1)
 		LCO_HYOR_EECItems.AddForm(Game.GetFormFromFile(0x080B, "EastEmpireCompanyArmor.esp"), 1, 1)
 		EECInjected = True
-	ELSEIF Game.GetFormFromFile(0x0801, "EastEmpireCompanyArmor.esp") as bool && EECInjected == true
+	ELSEIF !Game.GetFormFromFile(0x0801, "EastEmpireCompanyArmor.esp") as bool && EECInjected == true
 		LCO_HYOR_EECItems.Revert()
 		EECInjected = false
 	ENDIF
