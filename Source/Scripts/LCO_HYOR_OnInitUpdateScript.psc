@@ -17,10 +17,18 @@ bool EECInjected = false
 EVENT OnInit()
 	;Debug.Notification("OnInit() fired.")
 	LCO_HYORUpdater()
+	
 ENDEVENT
 
 Function LCO_HYORUpdater()
-	;Debug.Notification("LCO_HYORUpdater() begin.")
+    ;Debug.Notification("LCO_HYORUpdater() begin.")
+    EnableJehannaClaims()
+    InjectEECItems()
+    ;Debug.Notification("LCO_HYORUpdater() finished.")
+EndFunction
+
+;Jehanna Support
+Function EnableJehannaClaims()
 	if Game.GetFormFromFile(0x082D, "LCO_IliacBay.esp") as bool && LCO_HYOR_IBInstalled.GetValue() <= 0 ;checks to see if LCO_IliacyBay.esp is installed
 		LCO_HYOR_IBInstalled.SetValue(1) ;sets a global to confirm it is installed, allowing for Jehanna claims
 		;Debug.Notification(LCO_HYOR_IBInstalled.GetValue())
@@ -50,10 +58,8 @@ Function LCO_HYORUpdater()
 		CaptainFormsAdded = 0		
 		LCO_HYOR_JehannaItems.Revert()
 		;Debug.Notification("LChar list reverted.")
-    endif
-    InjectEECItems()
-    ;Debug.Notification("LCO_HYORUpdater() finished.")
-EndFunction
+    	endif
+endFunction
 
 Function InjectJehannaItems()
 	LCO_HYOR_JehannaItems.AddForm(Game.GetFormFromFile(0x0805, "LCO_IliacBay.esp"), 1, 1)
@@ -64,6 +70,7 @@ Function InjectJehannaItems()
 	LCO_HYOR_JehannaItems.AddForm(Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp"), 1, 1)
 EndFunction
 
+;East Empire Company Armor Support
 Function InjectEECItems()
 	IF Game.GetFormFromFile(0x0801, "EastEmpireCompanyArmor.esp") as bool && EECInjected == false
 		LCO_HYOR_EECItems.AddForm(Game.GetFormFromFile(0x0801, "EastEmpireCompanyArmor.esp"), 1, 1)
