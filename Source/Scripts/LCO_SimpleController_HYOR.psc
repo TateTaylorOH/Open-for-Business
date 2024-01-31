@@ -1,4 +1,5 @@
 Scriptname LCO_SimpleController_HYOR extends LCO_SimpleControllerBase
+{A simple controller for use in claims across the Hjorkvild Isles. Includes a few exclusive functions if specifically claiming Fort Icemoth.}
 
 ;/inherited properties
 Keyword CurrentOwnership
