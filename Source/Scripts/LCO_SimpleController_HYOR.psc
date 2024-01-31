@@ -90,7 +90,7 @@ function updateBanners(int i = -1)
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
-		setEECNeutral()
+		setEECNeutral() ;Exclusive function for Fort Icemoth
 	elseif(i == LCO.LocalHold())
 		myDefaultBanner.disableNoWait()
 		DisableIcemothBoss()
@@ -98,8 +98,8 @@ function updateBanners(int i = -1)
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
-		setEECNeutral()
-		setEECAlly(ClaimableFactions[0])
+		setEECNeutral() ;Exclusive function for Fort Icemoth
+		setEECAlly(ClaimableFactions[0]) ;Exclusive function for Fort Icemoth
 	elseif(i == LCO.Player())
 		myDefaultBanner.disableNoWait()
 		DisableIcemothBoss() ;Exclusive function for Fort Icemoth
@@ -108,7 +108,7 @@ function updateBanners(int i = -1)
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
 		ImportJehannaQuartermaster() ;Will make Jehanna Guard's Armor craftable after claiming a location. The rest of the function is Fort Icemoth exclusive.	
-		setEECNeutral()
+		setEECNeutral() ;Exclusive function for Fort Icemoth
 		setEECAlly(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction)
 	elseif(i == LCO.Imperial())
 		myDefaultBanner.disableNoWait()
@@ -117,8 +117,8 @@ function updateBanners(int i = -1)
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.enableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
-		setEECNeutral()
-		setEECAlly(ClaimableFactions[1])
+		setEECNeutral() ;Exclusive function for Fort Icemoth
+		setEECAlly(ClaimableFactions[1]) ;Exclusive function for Fort Icemoth
 	elseif(i == LCO.EastEmpireCompany())
 		myDefaultBanner.disableNoWait()
 		DisableIcemothBoss() ;Exclusive function for Fort Icemoth
@@ -126,7 +126,7 @@ function updateBanners(int i = -1)
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.enableNoWait()
-		setEECNeutral()
+		setEECNeutral() ;Exclusive function for Fort Icemoth
 	endIf
 endFunction
 
@@ -137,9 +137,11 @@ Actor Property IcemothQuartermasterJehanna auto
 Actor Property Silas auto
 {Fort Icemoth Exclusive Property: Controls enabling and disabling the boss.}
 Actor Property SilasMinion auto
-Faction[] Property ClaimableFactions auto
 {Fort Icemoth Exclusive Property: Controls enabling and disabling the boss minion.}
+Faction[] Property ClaimableFactions auto
+{Fort Icemoth Exclusive Property: An array containing the Haafingar and Imperial factions for setting and unsetting ally status depending on who controls Icemoth.}
 Faction Property TG04EastEmpireFaction auto
+{Fort Icemoth Exclusive Property: The EEC faction for setting and unsetting ally status depending on who controls Icemoth.}
 Location Property HYORFortIcemothLocation auto
 {Fort Icemoth Exclusive Property: Checks to make sure the current location is Fort Icemoth before running exclusive functions.}
 ObjectReference Property WatcherMarker auto
