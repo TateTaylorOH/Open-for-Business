@@ -138,8 +138,6 @@ Actor Property Silas auto
 {Fort Icemoth Exclusive Property: Controls enabling and disabling the boss.}
 Actor Property SilasMinion auto
 {Fort Icemoth Exclusive Property: Controls enabling and disabling the boss minion.}
-Faction Property TG04EastEmpireFaction auto
-{Fort Icemoth Exclusive Property: The EEC faction for setting and unsetting ally status depending on who controls Icemoth.}
 Faction[] Property ClaimableFactions auto
 {Fort Icemoth Exclusive Property: An array containing the Haafingar and Imperial factions for setting and unsetting EEC ally status depending on who controls Icemoth.}
 Location Property HYORFortIcemothLocation auto
@@ -165,15 +163,15 @@ endFunction
 
 function setEastEmpireAlly(faction ClaimedFaction)
 	IF thisLocation == HYORFortIcemothLocation 
-		TG04EastEmpireFaction.SetAlly(ClaimedFaction)
+		ClaimableFactions[0].SetAlly(ClaimedFaction)
 	ENDIF
 endFunction
 
 function setEastEmpireNeutral()
 	IF thisLocation == HYORFortIcemothLocation 
-		TG04EastEmpireFaction.SetEnemy(ClaimableFactions[0], true, true)
-		TG04EastEmpireFaction.SetEnemy(ClaimableFactions[1], true, true)
-		TG04EastEmpireFaction.SetEnemy((Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction), true, true)
+		ClaimableFactions[0].SetEnemy(ClaimableFactions[1], true, true)
+		ClaimableFactions[0].SetEnemy(ClaimableFactions[2], true, true)
+		ClaimableFactions[0].SetEnemy((Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction), true, true)
 	ENDIF
 endFunction
 
