@@ -141,7 +141,7 @@ Actor Property SilasMinion auto
 Faction Property TG04EastEmpireFaction auto
 {Fort Icemoth Exclusive Property: The EEC faction for setting and unsetting ally status depending on who controls Icemoth.}
 Faction[] Property ClaimableFactions auto
-{Fort Icemoth Exclusive Property: An array containing the Haafingar and Imperial factions for setting and unsetting ally status depending on who controls Icemoth.}
+{Fort Icemoth Exclusive Property: An array containing the Haafingar and Imperial factions for setting and unsetting EEC ally status depending on who controls Icemoth.}
 Location Property HYORFortIcemothLocation auto
 {Fort Icemoth Exclusive Property: Checks to make sure the current location is Fort Icemoth before running exclusive functions.}
 ObjectReference Property WatcherMarker auto
