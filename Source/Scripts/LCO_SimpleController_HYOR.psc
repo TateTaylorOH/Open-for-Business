@@ -162,11 +162,15 @@ function EnableIcemothBoss()
 endFunction
 
 function setEECAlly(faction ClaimedFaction)
-	TG04EastEmpireFaction.SetAlly(ClaimedFaction)
+	IF thisLocation == HYORFortIcemothLocation 
+		TG04EastEmpireFaction.SetAlly(ClaimedFaction)
+	ENDIF
 endFunction
 
 function setEECNeutral(faction ClaimedFaction)
-	TG04EastEmpireFaction.SetEnemy(ClaimedFaction, true, true)
+	IF thisLocation == HYORFortIcemothLocation 
+		TG04EastEmpireFaction.SetEnemy(ClaimedFaction, true, true)
+	ENDIF
 endFunction
 
 function ImportJehannaQuartermaster()
