@@ -99,7 +99,7 @@ function updateBanners(int i = -1)
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
 		setEECNeutral()
-		setEECAlly(ClaimableFactions[1])
+		setEECAlly(ClaimableFactions[0])
 	elseif(i == LCO.Player())
 		myDefaultBanner.disableNoWait()
 		DisableIcemothBoss() ;Exclusive function for Fort Icemoth
@@ -109,7 +109,7 @@ function updateBanners(int i = -1)
 		myEastEmpireCompanyBanner.disableNoWait()
 		ImportJehannaQuartermaster() ;Will make Jehanna Guard's Armor craftable after claiming a location. The rest of the function is Fort Icemoth exclusive.	
 		setEECNeutral()
-		setEECAlly(ClaimableFactions[2])
+		setEECAlly(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction)
 	elseif(i == LCO.Imperial())
 		myDefaultBanner.disableNoWait()
 		DisableIcemothBoss() ;Exclusive function for Fort Icemoth
@@ -118,7 +118,7 @@ function updateBanners(int i = -1)
 		myImperialBanner.enableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
 		setEECNeutral()
-		setEECAlly(ClaimableFactions[3])
+		setEECAlly(ClaimableFactions[1])
 	elseif(i == LCO.EastEmpireCompany())
 		myDefaultBanner.disableNoWait()
 		DisableIcemothBoss() ;Exclusive function for Fort Icemoth
@@ -169,7 +169,8 @@ endFunction
 
 function setEECNeutral()
 	IF thisLocation == HYORFortIcemothLocation 
-		TG04EastEmpireFaction.SetEnemy(ClaimableFactions)
+		TG04EastEmpireFaction.SetEnemy(ClaimableFactions, true, true)
+		TG04EastEmpireFaction.SetEnemy((Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction), true, true)
 	ENDIF
 endFunction
 
