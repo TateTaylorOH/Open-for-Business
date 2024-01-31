@@ -51,8 +51,8 @@ Function LCO_HYORUpdater()
 		LCO_HYOR_JehannaItems.Revert()
 		;Debug.Notification("LChar list reverted.")
     endif
-	InjectEECItems()
-	;Debug.Notification("LCO_HYORUpdater() finished.")
+    InjectEECItems()
+    ;Debug.Notification("LCO_HYORUpdater() finished.")
 EndFunction
 
 Function InjectJehannaItems()
