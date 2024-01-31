@@ -90,6 +90,7 @@ function updateBanners(int i = -1)
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
+		setEECNeutral(ClaimableFactions)
 	elseif(i == LCO.LocalHold())
 		myDefaultBanner.disableNoWait()
 		DisableIcemothBoss()
@@ -97,6 +98,8 @@ function updateBanners(int i = -1)
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
+		setEECNeutral(ClaimableFactions)
+		setEECAlly(ClaimableFactions[1])
 	elseif(i == LCO.Player())
 		myDefaultBanner.disableNoWait()
 		DisableIcemothBoss() ;Exclusive function for Fort Icemoth
@@ -104,7 +107,9 @@ function updateBanners(int i = -1)
 		myJehannaBanner.enableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
-		ImportJehannaQuartermaster() ;Will make Jehanna Guard's Armor craftable after claiming a location. The rest of the function is Fort Icemoth exclusive.
+		ImportJehannaQuartermaster() ;Will make Jehanna Guard's Armor craftable after claiming a location. The rest of the function is Fort Icemoth exclusive.	
+		setEECNeutral(ClaimableFactions)
+		setEECAlly(ClaimableFactions[2])
 	elseif(i == LCO.Imperial())
 		myDefaultBanner.disableNoWait()
 		DisableIcemothBoss() ;Exclusive function for Fort Icemoth
@@ -112,6 +117,8 @@ function updateBanners(int i = -1)
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.enableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
+		setEECNeutral(ClaimableFactions)
+		setEECAlly(ClaimableFactions[3])
 	elseif(i == LCO.EastEmpireCompany())
 		myDefaultBanner.disableNoWait()
 		DisableIcemothBoss() ;Exclusive function for Fort Icemoth
@@ -119,6 +126,7 @@ function updateBanners(int i = -1)
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.enableNoWait()
+		setEECNeutral(ClaimableFactions)
 	endIf
 endFunction
 
@@ -129,7 +137,9 @@ Actor Property IcemothQuartermasterJehanna auto
 Actor Property Silas auto
 {Fort Icemoth Exclusive Property: Controls enabling and disabling the boss.}
 Actor Property SilasMinion auto
-{Fort Icemoth Exclusive Property: Controls enabling and disabling the boss minion.} 
+Faction[] Property ClaimableFactions auto
+{Fort Icemoth Exclusive Property: Controls enabling and disabling the boss minion.}
+Faction Property TG04EastEmpireFaction auto
 Location Property HYORFortIcemothLocation auto
 {Fort Icemoth Exclusive Property: Checks to make sure the current location is Fort Icemoth before running exclusive functions.}
 ObjectReference Property WatcherMarker auto
@@ -151,6 +161,14 @@ function EnableIcemothBoss()
 	ENDIF
 endFunction
 
+function setEECAlly(faction ClaimedFaction)
+	TG04EastEmpireFaction.SetAlly(ClaimedFaction)
+endFunction
+
+function setEECNeutral(faction ClaimedFaction)
+	TG04EastEmpireFaction.SetEnemy(ClaimedFaction, true, true)
+endFunction
+
 function ImportJehannaQuartermaster()
 	IF thisLocation == HYORFortIcemothLocation 
 		IF !IcemothQuartermasterJehanna.IsInFaction(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction)
@@ -165,3 +183,4 @@ function ImportJehannaQuartermaster()
 		(Game.GetFormFromFile(0x0183C, "LCO_IliacBay.esp") as GlobalVariable).SetValue(1)
 	ENDIF
 endFunction
+
