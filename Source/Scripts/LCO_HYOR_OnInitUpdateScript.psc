@@ -16,6 +16,7 @@ EndFunction
 ;-- Jehanna Support ---------------------------------------
 
 GlobalVariable Property LCO_HYOR_IBInstalled  Auto
+Faction Property LCO_IB_JehannaDummyFaction auto
 Keyword Property LocationChangeOwnershipEvent auto
 LeveledActor Property LCO_IB_LCharJehannaGuardCaptainDummy auto
 LeveledActor Property LCO_IB_LCharJehannaGuardFacesDummy auto
@@ -30,12 +31,13 @@ Function EnableJehannaClaims()
 	if Game.GetFormFromFile(0x082D, "LCO_IliacBay.esp") as bool && LCO_HYOR_IBInstalled.GetValue() <= 0 ;checks to see if LCO_IliacyBay.esp is installed
 		LCO_HYOR_IBInstalled.SetValue(1) ;sets a global to confirm it is installed, allowing for Jehanna claims
 		;Debug.Notification(LCO_HYOR_IBInstalled.GetValue())
-		while (GuardFormsAdded < 100) ;you cannot populate an empty LChar list with injected forms, so this adds a large number of Guard Forms from LCO_IliacyBay.esp to ensure the proper NPCs are enabled when claiming for Jehanna
+		(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction).SetAlly(LCO_IB_JehannaDummyFaction)
+		while (GuardFormsAdded < 6) ;you cannot populate an empty LChar list with injected forms, so this adds a large number of Guard Forms from LCO_IliacyBay.esp to ensure the proper NPCs are enabled when claiming for Jehanna
 			LCO_IB_LCharJehannaGuardFacesDummy.AddForm(Game.GetFormFromFile(0x082D, "LCO_IliacBay.esp"), 1)
 			GuardFormsAdded += 1
 		endwhile
 		LCO_IB_LCharJehannaGuardFacesDummy.SetNthCount(0, 0) ;removes the LCO_EECGuard dummy record to ensure they do not spawn, there is still around a 1% chance that the record will be selected, if it does, no guard will be added
-		while (CaptainFormsAdded < 100) ;does the same thing as above, but specifically for the unique Captain
+		while (CaptainFormsAdded < 6) ;does the same thing as above, but specifically for the unique Captain
 			LCO_IB_LCharJehannaGuardCaptainDummy.AddForm(Game.GetFormFromFile(0x082C, "LCO_IliacBay.esp"), 1)
 			CaptainFormsAdded += 1
 		endwhile
