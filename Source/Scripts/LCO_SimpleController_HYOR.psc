@@ -150,7 +150,7 @@ endFunction
 function ImportJehannaQuartermaster()
 	Faction Jehanna = Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction
 	GlobalVariable JehannaArmorCraftable = Game.GetFormFromFile(0x0183C, "LCO_IliacBay.esp") as GlobalVariable
-	Weapon BretonSteelSword = Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp"
+	Weapon BretonSteelSword = Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp")
 	IF thisLocation == HYORFortIcemothLocation 
 		IF !IcemothQuartermasterJehanna.IsInFaction(Jehanna)
 			IcemothQuartermasterJehanna.AddToFaction(Jehanna)
