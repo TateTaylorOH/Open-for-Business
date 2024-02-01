@@ -101,7 +101,7 @@ function updateBanners(int i = -1)
 		myJehannaBanner.enableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
-		ImportJehannaQuartermaster() ;Will make Jehanna Guard's Armor craftable after claiming a location. The rest of the function is Fort Icemoth exclusive.	
+		ImportJehannaQuartermaster() ;Will make Jehanna Guard's Armor craftable after claiming a location for Jehanna. The rest of the function is Fort Icemoth exclusive.	
 	elseif(i == LCO.Imperial())
 		myDefaultBanner.disableNoWait()
 		myHoldBanner.disableNoWait()
@@ -115,8 +115,8 @@ function updateBanners(int i = -1)
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.enableNoWait()
 	endIf
-	DisableIcemothBoss() 
-	JehannaSetEECAlly()
+	DisableIcemothBoss() ;Fort Icemoth Exclusive
+	JehannaSetEECAlly() ;Fort Icemoth Exclusive
 endFunction
 
 ;-- Fort Icemoth Exclusives ---------------------------------------
