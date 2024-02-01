@@ -85,42 +85,38 @@ function updateBanners(int i = -1)
 	endIf
 	if(i == LCO.Default())
 		myDefaultBanner.enableNoWait()
-		EnableIcemothBoss() ;Exclusive function for Fort Icemoth
 		myHoldBanner.disableNoWait()
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
 	elseif(i == LCO.LocalHold())
 		myDefaultBanner.disableNoWait()
-		DisableIcemothBoss()
 		myHoldBanner.enableNoWait()
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
 	elseif(i == LCO.Player())
 		myDefaultBanner.disableNoWait()
-		DisableIcemothBoss() ;Exclusive function for Fort Icemoth
 		myHoldBanner.disableNoWait()
 		myJehannaBanner.enableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
-		JehannaSetEECAlly() ;Sets the EEC as allies the first time you claim a location for Jehanna
 		ImportJehannaQuartermaster() ;Will make Jehanna Guard's Armor craftable after claiming a location. The rest of the function is Fort Icemoth exclusive.	
 	elseif(i == LCO.Imperial())
 		myDefaultBanner.disableNoWait()
-		DisableIcemothBoss() ;Exclusive function for Fort Icemoth
 		myHoldBanner.disableNoWait()
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.enableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
 	elseif(i == LCO.EastEmpireCompany())
 		myDefaultBanner.disableNoWait()
-		DisableIcemothBoss() ;Exclusive function for Fort Icemoth
 		myHoldBanner.disableNoWait()
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.enableNoWait()
 	endIf
+	DisableIcemothBoss() 
+	JehannaSetEECAlly()
 endFunction
 
 ;-- Fort Icemoth Exclusives ---------------------------------------
@@ -139,25 +135,27 @@ ObjectReference Property WatcherMarker auto
 {Fort Icemoth Exclusive Property: Controls enabling and disabling the Watcher's body.} 
 
 function DisableIcemothBoss()
-	IF thisLocation == HYORFortIcemothLocation 
-		Silas.Disable()
-		SilasMinion.Disable()
-		WatcherMarker.Disable()
-	ENDIF
-endFunction
-
-function EnableIcemothBoss()
-	IF thisLocation == HYORFortIcemothLocation 
-		Silas.Enable()
-		SilasMinion.Enable()
-		WatcherMarker.Enable()
+	IF thisLocation == HYORFortIcemothLocation
+		IF myDefaultBanner.IsDisabled()
+			Silas.Disable()
+			SilasMinion.Disable()
+			WatcherMarker.Disable()
+		ELSEIF !myDefaultBanner.IsDisabled()
+			Silas.Enable()
+			SilasMinion.Enable()
+			WatcherMarker.Enable()
+		ENDIF
 	ENDIF
 endFunction
 
 function JehannaSetEECAlly()
-	IF thisLocation == HYORFortIcemothLocation 	
-		IF !(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction).GetReaction(TG04EastEmpireFaction) == 2
-			(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction).SetAlly(TG04EastEmpireFaction)
+	IF thisLocation == HYORFortIcemothLocation
+		IF myJehannaBanner.IsDisabled()
+			IF (Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction).GetReaction(TG04EastEmpireFaction) == 2
+				(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction).SetEnemy(TG04EastEmpireFaction, true, true)			
+			ELSEIF !(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction).GetReaction(TG04EastEmpireFaction) == 2
+				(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction).SetAlly(TG04EastEmpireFaction)
+			ENDIF
 		ENDIF
 	ENDIF
 endFunction
@@ -167,8 +165,10 @@ function ImportJehannaQuartermaster()
 		IF !IcemothQuartermasterJehanna.IsInFaction(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction)
 			IcemothQuartermasterJehanna.AddToFaction(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction)
 		ENDIF
-		IF IcemothQuartermasterJehanna.GetItemCount(Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp")) < 1
-			IcemothQuartermasterJehanna.AddItem(Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp"), 1)
+		IF !IcemothQuartermasterJehanna.IsEquipped(Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp"))
+			IF IcemothQuartermasterJehanna.GetItemCount(Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp")) < 1
+				IcemothQuartermasterJehanna.AddItem(Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp"), 1)
+			ENDIF
 			IcemothQuartermasterJehanna.EquipItem(Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp"))
 		ENDIF
 	ENDIF
