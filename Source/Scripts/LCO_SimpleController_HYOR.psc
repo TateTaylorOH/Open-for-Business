@@ -116,7 +116,6 @@ function updateBanners(int i = -1)
 		myEastEmpireCompanyBanner.enableNoWait()
 	endIf
 	DisableIcemothBoss() ;Fort Icemoth Exclusive
-	JehannaSetEECAlly() ;Fort Icemoth Exclusive
 endFunction
 
 ;-- Fort Icemoth Exclusives ---------------------------------------
@@ -144,18 +143,6 @@ function DisableIcemothBoss()
 			Silas.Enable()
 			SilasMinion.Enable()
 			WatcherMarker.Enable()
-		ENDIF
-	ENDIF
-endFunction
-
-function JehannaSetEECAlly()
-	IF thisLocation == HYORFortIcemothLocation
-		IF myJehannaBanner.IsDisabled()
-			IF (Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction).GetReaction(TG04EastEmpireFaction) == 2
-				(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction).SetEnemy(TG04EastEmpireFaction, true, true)			
-			ELSEIF !(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction).GetReaction(TG04EastEmpireFaction) == 2
-				(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction).SetAlly(TG04EastEmpireFaction)
-			ENDIF
 		ENDIF
 	ENDIF
 endFunction
