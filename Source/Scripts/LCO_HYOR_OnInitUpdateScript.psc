@@ -8,6 +8,10 @@ ENDEVENT
 
 Function LCO_HYORUpdater()
     ;Debug.Notification("LCO_HYORUpdater() begin.")
+    IF Jehanna.GetReaction(TG04EastEmpireFaction) == 2
+        Jehanna.SetEnemy(TG04EastEmpireFaction, true, true)
+    ENDIF
+    Jehanna.SetAlly(LCO_HYOR_JehannaDummyFaction)
     JehannaSupport()
     EECArmorSupport()
     ;Debug.Notification("LCO_HYORUpdater() finished.")
@@ -33,9 +37,6 @@ Function JehannaSupport()
 	LeveledCharacter JehannaGuards = Game.GetFormFromFile(0x082D, "LCO_IliacBay.esp")
 	if JehannaGuards as bool && LCO_HYOR_IBInstalled.GetValue() <= 0 || GuardFormsAdded > 6 || CaptainFormsAdded > 6
 		LCO_HYOR_IBInstalled.SetValue(1) 
-		IF Jehanna.GetReaction(TG04EastEmpireFaction) == 2
-			Jehanna.SetEnemy(TG04EastEmpireFaction, true, true)
-		ENDIF
 		Jehanna.SetAlly(LCO_HYOR_JehannaDummyFaction)
 		LCO_HYOR_LCharJehannaGuardFacesDummy.Revert()
 		while (GuardFormsAdded < 6)
