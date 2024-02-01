@@ -8,8 +8,8 @@ ENDEVENT
 
 Function LCO_HYORUpdater()
     ;Debug.Notification("LCO_HYORUpdater() begin.")
-    EnableJehannaClaims()
-    InjectEECItems()
+    JehannaSupport()
+    EECArmorSupport()
     ;Debug.Notification("LCO_HYORUpdater() finished.")
 EndFunction
 
@@ -28,7 +28,7 @@ ObjectReference Property LCO_IcemothControlMarkerJehanna auto
 int CaptainFormsAdded = 0
 int GuardFormsAdded = 0
 
-Function EnableJehannaClaims()
+Function JehannaSupport()
 	Faction Jehanna = Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction
 	LeveledCharacter JehannaGuards = Game.GetFormFromFile(0x082D, "LCO_IliacBay.esp")
 	if JehannaGuards as bool && LCO_HYOR_IBInstalled.GetValue() <= 0 || GuardFormsAdded > 6 || CaptainFormsAdded > 6
@@ -76,7 +76,7 @@ LeveledItem Property LCO_HYOR_EECItems auto
 
 bool EECInjected = false
 
-Function InjectEECItems()
+Function EECArmorSupport()
 	IF Game.GetFormFromFile(0x0801, "EastEmpireCompanyArmor.esp") as bool && EECInjected == false
 		LCO_HYOR_EECItems.AddForm(Game.GetFormFromFile(0x0801, "EastEmpireCompanyArmor.esp"), 1, 1)
 		LCO_HYOR_EECItems.AddForm(Game.GetFormFromFile(0x0807, "EastEmpireCompanyArmor.esp"), 1, 1)
