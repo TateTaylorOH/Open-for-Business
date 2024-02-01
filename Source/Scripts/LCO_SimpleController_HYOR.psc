@@ -114,7 +114,7 @@ function updateBanners(int i = -1)
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.enableNoWait()
 	endIf
-	DisableIcemothBoss() ;Fort Icemoth Exclusive
+	DisableIcemothBoss()
 endFunction
 
 ;-- Fort Icemoth Exclusives ---------------------------------------
