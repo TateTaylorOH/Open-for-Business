@@ -101,7 +101,7 @@ function updateBanners(int i = -1)
 		myJehannaBanner.enableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
-		ImportJehannaQuartermaster() ;Will make Jehanna Guard's Armor craftable after claiming a location for Jehanna. The rest of the function is Fort Icemoth exclusive.	
+		ImportJehannaQuartermaster()
 	elseif(i == LCO.Imperial())
 		myDefaultBanner.disableNoWait()
 		myHoldBanner.disableNoWait()
