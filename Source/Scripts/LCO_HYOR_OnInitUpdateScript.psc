@@ -17,6 +17,7 @@ EndFunction
 
 GlobalVariable Property LCO_HYOR_IBInstalled  Auto
 Faction Property LCO_HYOR_JehannaDummyFaction auto
+Faction Property TG04EastEmpireFaction auto
 Keyword Property LocationChangeOwnershipEvent auto
 LeveledActor Property LCO_HYOR_LCharJehannaGuardCaptainDummy auto
 LeveledActor Property LCO_HYOR_LCharJehannaGuardFacesDummy auto
@@ -28,26 +29,31 @@ int CaptainFormsAdded = 0
 int GuardFormsAdded = 0
 
 Function EnableJehannaClaims()
-	if Game.GetFormFromFile(0x082D, "LCO_IliacBay.esp") as bool && LCO_HYOR_IBInstalled.GetValue() <= 0 || GuardFormsAdded > 6 && CaptainFormsAdded > 6
-		LCO_HYOR_IBInstalled.SetValue(1) ;sets a global to confirm it is installed, allowing for Jehanna claims
-		(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction).SetAlly(LCO_HYOR_JehannaDummyFaction)
+	Faction Jehanna = Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction
+	LeveledCharacter JehannaGuards = Game.GetFormFromFile(0x082D, "LCO_IliacBay.esp")
+	if JehannaGuards as bool && LCO_HYOR_IBInstalled.GetValue() <= 0 || GuardFormsAdded > 6 || CaptainFormsAdded > 6
+		LCO_HYOR_IBInstalled.SetValue(1) 
+		IF Jehanna.GetReaction(TG04EastEmpireFaction) == 2
+			Jehanna.SetEnemy(TG04EastEmpireFaction, true, true)
+		ENDIF
+		Jehanna.SetAlly(LCO_HYOR_JehannaDummyFaction)
 		LCO_HYOR_LCharJehannaGuardFacesDummy.Revert()
 		while (GuardFormsAdded < 6)
-			LCO_HYOR_LCharJehannaGuardFacesDummy.AddForm(Game.GetFormFromFile(0x082D, "LCO_IliacBay.esp"), 1)
+			LCO_HYOR_LCharJehannaGuardFacesDummy.AddForm(JehannaGuards), 1)
 			GuardFormsAdded += 1
 		endwhile
 		LCO_HYOR_LCharJehannaGuardCaptainDummy.Revert()
-		while (CaptainFormsAdded < 6) ;does the same thing as above, but specifically for the unique Captain
-			LCO_HYOR_LCharJehannaGuardCaptainDummy.AddForm(Game.GetFormFromFile(0x082C, "LCO_IliacBay.esp"), 1)
+		while (CaptainFormsAdded < 6
+			LCO_HYOR_LCharJehannaGuardCaptainDummy.AddForm(JehannaGuards), 1)
 			CaptainFormsAdded += 1
 		endwhile
 		InjectJehannaItems()		
-	elseif !Game.GetFormFromFile(0x082D, "LCO_IliacBay.esp") as bool && LCO_HYOR_IBInstalled.GetValue() >= 1
-		LCO_HYOR_IBInstalled.SetValue(0) ;forbids Jehanna claims
+	elseif !JehannaGuards as bool && LCO_HYOR_IBInstalled.GetValue() >= 1
+		LCO_HYOR_IBInstalled.SetValue(0) 
 		IF LCO_IcemothControlMarkerJehanna.IsEnabled()
 			LocationChangeOwnershipEvent.sendStoryEvent(HYORFortIcemothLocation, none, none, LCO.Default())
 		ENDIF
-		LCO_HYOR_LCharJehannaGuardFacesDummy.Revert() ;revert any script added forms
+		LCO_HYOR_LCharJehannaGuardFacesDummy.Revert() 
 		GuardFormsAdded = 0
 		LCO_HYOR_LCharJehannaGuardCaptainDummy.Revert()	
 		CaptainFormsAdded = 0		
