@@ -101,7 +101,7 @@ function updateBanners(int i = -1)
 		myJehannaBanner.enableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
-		EnableJehannaCrafting()
+		EnableJehannaGuardArmorCrafting()
 	elseif(i == LCO.Imperial())
 		myDefaultBanner.disableNoWait()
 		myHoldBanner.disableNoWait()
@@ -145,7 +145,7 @@ endFunction
 
 ;-- Jehanna Support ---------------------------------------
 
-function EnableJehannaCrafting()
+function EnableJehannaGuardArmorCrafting()
 	GlobalVariable JehannaArmorCraftable = Game.GetFormFromFile(0x0183C, "LCO_IliacBay.esp") as GlobalVariable
 	IF JehannaArmorCraftable.GetValue() < 1
 		JehannaArmorCraftable.SetValue(1)
