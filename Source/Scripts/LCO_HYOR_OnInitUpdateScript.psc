@@ -16,10 +16,10 @@ EndFunction
 ;-- Jehanna Support ---------------------------------------
 
 GlobalVariable Property LCO_HYOR_IBInstalled  Auto
-Faction Property LCO_IB_JehannaDummyFaction auto
+Faction Property LCO_HYOR_JehannaDummyFaction auto
 Keyword Property LocationChangeOwnershipEvent auto
-LeveledActor Property LCO_IB_LCharJehannaGuardCaptainDummy auto
-LeveledActor Property LCO_IB_LCharJehannaGuardFacesDummy auto
+LeveledActor Property LCO_HYOR_LCharJehannaGuardCaptainDummy auto
+LeveledActor Property LCO_HYOR_LCharJehannaGuardFacesDummy auto
 LeveledItem Property LCO_HYOR_JehannaItems auto
 Location Property HYORFortIcemothLocation auto
 ObjectReference Property LCO_IcemothControlMarkerJehanna auto
@@ -28,36 +28,34 @@ int CaptainFormsAdded = 0
 int GuardFormsAdded = 0
 
 Function EnableJehannaClaims()
-	if Game.GetFormFromFile(0x082D, "LCO_IliacBay.esp") as bool && LCO_HYOR_IBInstalled.GetValue() <= 0 ;checks to see if LCO_IliacyBay.esp is installed
+	if Game.GetFormFromFile(0x082D, "LCO_IliacBay.esp") as bool && LCO_HYOR_IBInstalled.GetValue() <= 0
 		LCO_HYOR_IBInstalled.SetValue(1) ;sets a global to confirm it is installed, allowing for Jehanna claims
-		;Debug.Notification(LCO_HYOR_IBInstalled.GetValue())
-		(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction).SetAlly(LCO_IB_JehannaDummyFaction)
-		while (GuardFormsAdded < 6) ;you cannot populate an empty LChar list with injected forms, so this adds a large number of Guard Forms from LCO_IliacyBay.esp to ensure the proper NPCs are enabled when claiming for Jehanna
-			LCO_IB_LCharJehannaGuardFacesDummy.AddForm(Game.GetFormFromFile(0x082D, "LCO_IliacBay.esp"), 1)
+		(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction).SetAlly(LCO_HYOR_JehannaDummyFaction)
+		IF GuardFormsAdded > 6
+			LCO_HYOR_LCharJehannaGuardFacesDummy.Revert()
+		ENDIF
+		while (GuardFormsAdded < 6)
+			LCO_HYOR_LCharJehannaGuardFacesDummy.AddForm(Game.GetFormFromFile(0x082D, "LCO_IliacBay.esp"), 1)
 			GuardFormsAdded += 1
 		endwhile
-		LCO_IB_LCharJehannaGuardFacesDummy.SetNthCount(0, 0) ;removes the LCO_EECGuard dummy record to ensure they do not spawn, there is still around a 1% chance that the record will be selected, if it does, no guard will be added
+		IF CaptainFormsAdded > 6
+			LCO_HYOR_LCharJehannaGuardCaptainDummy.Revert()
+		ENDIF
 		while (CaptainFormsAdded < 6) ;does the same thing as above, but specifically for the unique Captain
-			LCO_IB_LCharJehannaGuardCaptainDummy.AddForm(Game.GetFormFromFile(0x082C, "LCO_IliacBay.esp"), 1)
+			LCO_HYOR_LCharJehannaGuardCaptainDummy.AddForm(Game.GetFormFromFile(0x082C, "LCO_IliacBay.esp"), 1)
 			CaptainFormsAdded += 1
 		endwhile
-		LCO_IB_LCharJehannaGuardCaptainDummy.SetNthCount(0, 0)
-		;Debug.Notification("Guards injected.")	
 		InjectJehannaItems()		
-	elseif !Game.GetFormFromFile(0x082D, "LCO_IliacBay.esp") as bool && LCO_HYOR_IBInstalled.GetValue() >= 1 ;checks to see if LCO_IliacyBay.esp is NOT installed
+	elseif !Game.GetFormFromFile(0x082D, "LCO_IliacBay.esp") as bool && LCO_HYOR_IBInstalled.GetValue() >= 1
 		LCO_HYOR_IBInstalled.SetValue(0) ;forbids Jehanna claims
 		IF LCO_IcemothControlMarkerJehanna.IsEnabled()
-			LocationChangeOwnershipEvent.sendStoryEvent(HYORFortIcemothLocation, none, none, LCO.Default()) ;if Fort Icemoth is currently under Jehanna control, reset it to default
+			LocationChangeOwnershipEvent.sendStoryEvent(HYORFortIcemothLocation, none, none, LCO.Default())
 		ENDIF
-		;Debug.Notification(LCO_HYOR_IBInstalled.GetValue())
-		LCO_IB_LCharJehannaGuardFacesDummy.Revert() ;revert any script added forms
-		LCO_IB_LCharJehannaGuardFacesDummy.SetNthCount(0, 1) ;reset the LCO_EECGuard dummy record to a count of 1
+		LCO_HYOR_LCharJehannaGuardFacesDummy.Revert() ;revert any script added forms
 		GuardFormsAdded = 0
-		LCO_IB_LCharJehannaGuardCaptainDummy.Revert()	
-		LCO_IB_LCharJehannaGuardCaptainDummy.SetNthCount(0, 1)
+		LCO_HYOR_LCharJehannaGuardCaptainDummy.Revert()	
 		CaptainFormsAdded = 0		
 		LCO_HYOR_JehannaItems.Revert()
-		;Debug.Notification("LChar list reverted.")
     	endif
 endFunction
 
