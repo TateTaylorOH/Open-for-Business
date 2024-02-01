@@ -28,7 +28,7 @@ int CaptainFormsAdded = 0
 int GuardFormsAdded = 0
 
 Function EnableJehannaClaims()
-	if Game.GetFormFromFile(0x082D, "LCO_IliacBay.esp") as bool && LCO_HYOR_IBInstalled.GetValue() <= 0
+	if Game.GetFormFromFile(0x082D, "LCO_IliacBay.esp") as bool && LCO_HYOR_IBInstalled.GetValue() <= 0 || GuardFormsAdded > 6 && CaptainFormsAdded > 6
 		LCO_HYOR_IBInstalled.SetValue(1) ;sets a global to confirm it is installed, allowing for Jehanna claims
 		(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction).SetAlly(LCO_HYOR_JehannaDummyFaction)
 		IF GuardFormsAdded > 6
