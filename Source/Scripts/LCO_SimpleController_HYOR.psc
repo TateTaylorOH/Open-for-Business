@@ -148,18 +148,21 @@ function DisableIcemothBoss()
 endFunction
 
 function ImportJehannaQuartermaster()
+	Faction Jehanna = Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction
+	GlobalVariable JehannaArmorCraftable = Game.GetFormFromFile(0x0183C, "LCO_IliacBay.esp") as GlobalVariable
+	Weapon BretonSteelSword = Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp"
 	IF thisLocation == HYORFortIcemothLocation 
-		IF !IcemothQuartermasterJehanna.IsInFaction(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction)
-			IcemothQuartermasterJehanna.AddToFaction(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction)
+		IF !IcemothQuartermasterJehanna.IsInFaction(Jehanna)
+			IcemothQuartermasterJehanna.AddToFaction(Jehanna)
 		ENDIF
-		IF !IcemothQuartermasterJehanna.IsEquipped(Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp"))
-			IF IcemothQuartermasterJehanna.GetItemCount(Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp")) < 1
-				IcemothQuartermasterJehanna.AddItem(Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp"), 1)
+		IF !IcemothQuartermasterJehanna.IsEquipped(BretonSteelSword)
+			IF IcemothQuartermasterJehanna.GetItemCount(BretonSteelSword) < 1
+				IcemothQuartermasterJehanna.AddItem(BretonSteelSword), 1)
 			ENDIF
-			IcemothQuartermasterJehanna.EquipItem(Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp"))
+			IcemothQuartermasterJehanna.EquipItem(BretonSteelSword)
 		ENDIF
 	ENDIF
-	IF (Game.GetFormFromFile(0x0183C, "LCO_IliacBay.esp") as GlobalVariable).GetValue() < 1
-		(Game.GetFormFromFile(0x0183C, "LCO_IliacBay.esp") as GlobalVariable).SetValue(1)
+	IF JehannaArmorCraftable.GetValue() < 1
+		JehannaArmorCraftable.SetValue(1)
 	ENDIF
 endFunction
