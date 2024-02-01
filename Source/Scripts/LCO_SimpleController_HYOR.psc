@@ -90,7 +90,6 @@ function updateBanners(int i = -1)
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
-		setEastEmpireNeutral() ;Exclusive function for Fort Icemoth
 	elseif(i == LCO.LocalHold())
 		myDefaultBanner.disableNoWait()
 		DisableIcemothBoss()
@@ -98,8 +97,6 @@ function updateBanners(int i = -1)
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
-		setEastEmpireNeutral() ;Exclusive function for Fort Icemoth
-		setEastEmpireAlly(ClaimableFactions[1]) ;Exclusive function for Fort Icemoth
 	elseif(i == LCO.Player())
 		myDefaultBanner.disableNoWait()
 		DisableIcemothBoss() ;Exclusive function for Fort Icemoth
@@ -107,9 +104,8 @@ function updateBanners(int i = -1)
 		myJehannaBanner.enableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
+		JehannaSetEECAlly() ;Sets the EEC as allies the first time you claim a location for Jehanna
 		ImportJehannaQuartermaster() ;Will make Jehanna Guard's Armor craftable after claiming a location. The rest of the function is Fort Icemoth exclusive.	
-		setEastEmpireNeutral() ;Exclusive function for Fort Icemoth
-		setEastEmpireAlly(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction)
 	elseif(i == LCO.Imperial())
 		myDefaultBanner.disableNoWait()
 		DisableIcemothBoss() ;Exclusive function for Fort Icemoth
@@ -117,8 +113,6 @@ function updateBanners(int i = -1)
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.enableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
-		setEastEmpireNeutral() ;Exclusive function for Fort Icemoth
-		setEastEmpireAlly(ClaimableFactions[2]) ;Exclusive function for Fort Icemoth
 	elseif(i == LCO.EastEmpireCompany())
 		myDefaultBanner.disableNoWait()
 		DisableIcemothBoss() ;Exclusive function for Fort Icemoth
@@ -126,7 +120,6 @@ function updateBanners(int i = -1)
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.enableNoWait()
-		setEastEmpireNeutral() ;Exclusive function for Fort Icemoth
 	endIf
 endFunction
 
@@ -138,8 +131,8 @@ Actor Property Silas auto
 {Fort Icemoth Exclusive Property: Controls enabling and disabling the boss.}
 Actor Property SilasMinion auto
 {Fort Icemoth Exclusive Property: Controls enabling and disabling the boss minion.}
-Faction[] Property ClaimableFactions auto
-{Fort Icemoth Exclusive Property: An array containing the EEC, Haafingar, and Imperial factions for setting and unsetting EEC ally status depending on who controls Icemoth.}
+Faction Property TG04EastEmpireFaction auto
+{Fort Icemoth Exclusive Property: For adding the EEC as allies to Jehanna.}
 Location Property HYORFortIcemothLocation auto
 {Fort Icemoth Exclusive Property: Checks to make sure the current location is Fort Icemoth before running exclusive functions.}
 ObjectReference Property WatcherMarker auto
@@ -161,17 +154,11 @@ function EnableIcemothBoss()
 	ENDIF
 endFunction
 
-function setEastEmpireAlly(faction ClaimedFaction)
-	IF thisLocation == HYORFortIcemothLocation 
-		ClaimableFactions[0].SetAlly(ClaimedFaction)
-	ENDIF
-endFunction
-
-function setEastEmpireNeutral()
-	IF thisLocation == HYORFortIcemothLocation 
-		ClaimableFactions[0].SetEnemy(ClaimableFactions[1], true, true)
-		ClaimableFactions[0].SetEnemy(ClaimableFactions[2], true, true)
-		ClaimableFactions[0].SetEnemy((Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction), true, true)
+function JehannaSetEECAlly()
+	IF thisLocation == HYORFortIcemothLocation 	
+		IF !(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction).GetReaction(TG04EastEmpireFaction) == 2
+			(Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction).SetAlly(TG04EastEmpireFaction)
+		ENDIF
 	ENDIF
 endFunction
 
@@ -189,4 +176,3 @@ function ImportJehannaQuartermaster()
 		(Game.GetFormFromFile(0x0183C, "LCO_IliacBay.esp") as GlobalVariable).SetValue(1)
 	ENDIF
 endFunction
-
