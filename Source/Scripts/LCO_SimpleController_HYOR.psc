@@ -101,7 +101,6 @@ function updateBanners(int i = -1)
 		myJehannaBanner.enableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
-		ImportJehannaQuartermaster()
 	elseif(i == LCO.Imperial())
 		myDefaultBanner.disableNoWait()
 		myHoldBanner.disableNoWait()
@@ -120,14 +119,10 @@ endFunction
 
 ;-- Fort Icemoth Exclusives ---------------------------------------
 
-Actor Property IcemothQuartermasterJehanna auto
-{Fort Icemoth Exclusive Property: Used to control patchless compatibility with the Jehanna Quartermaster.}
 Actor Property Silas auto
 {Fort Icemoth Exclusive Property: Controls enabling and disabling the boss.}
 Actor Property SilasMinion auto
 {Fort Icemoth Exclusive Property: Controls enabling and disabling the boss minion.}
-Faction Property TG04EastEmpireFaction auto
-{Fort Icemoth Exclusive Property: For adding the EEC as allies to Jehanna.}
 Location Property HYORFortIcemothLocation auto
 {Fort Icemoth Exclusive Property: Checks to make sure the current location is Fort Icemoth before running exclusive functions.}
 ObjectReference Property WatcherMarker auto
@@ -144,25 +139,5 @@ function DisableIcemothBoss()
 			SilasMinion.Enable()
 			WatcherMarker.Enable()
 		ENDIF
-	ENDIF
-endFunction
-
-function ImportJehannaQuartermaster()
-	Faction Jehanna = Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction
-	Weapon BretonSteelSword = Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp")
-	GlobalVariable JehannaArmorCraftable = Game.GetFormFromFile(0x0183C, "LCO_IliacBay.esp") as GlobalVariable
-	IF thisLocation == HYORFortIcemothLocation 
-		IF !IcemothQuartermasterJehanna.IsInFaction(Jehanna)
-			IcemothQuartermasterJehanna.AddToFaction(Jehanna)
-		ENDIF
-		IF !IcemothQuartermasterJehanna.IsEquipped(BretonSteelSword)
-			IF IcemothQuartermasterJehanna.GetItemCount(BretonSteelSword) < 1
-				IcemothQuartermasterJehanna.AddItem(BretonSteelSword), 1)
-			ENDIF
-			IcemothQuartermasterJehanna.EquipItem(BretonSteelSword)
-		ENDIF
-	ENDIF
-	IF JehannaArmorCraftable.GetValue() < 1
-		JehannaArmorCraftable.SetValue(1)
 	ENDIF
 endFunction
