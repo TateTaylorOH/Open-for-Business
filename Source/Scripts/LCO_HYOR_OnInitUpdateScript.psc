@@ -8,8 +8,8 @@ ENDEVENT
 Function LCO_HYORUpdater()
 	Faction LCO_IB_JehannaFaction = Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction
 
-    JehannaSupport()
-    EECArmorSupport()
+	JehannaSupport()
+    	EECArmorSupport()
 	IF TG04EastEmpireFaction.GetReaction(LCO_IB_JehannaFaction) == 2
 		TG04EastEmpireFaction.SetEnemy(LCO_IB_JehannaFaction, true, true)
 	ENDIF
