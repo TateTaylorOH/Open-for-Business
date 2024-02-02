@@ -80,18 +80,21 @@ function updateBanners(int i = -1)
 	endIf
 	if(i == LCO.Default())
 		myDefaultBanner.enableNoWait()
+		EnableIcemothBoss()
 		myHoldBanner.disableNoWait()
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
 	elseif(i == LCO.LocalHold())
 		myDefaultBanner.disableNoWait()
+		DisableIcemothBoss()
 		myHoldBanner.enableNoWait()
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
 	elseif(i == LCO.Player())
 		myDefaultBanner.disableNoWait()
+		DisableIcemothBoss()
 		myHoldBanner.disableNoWait()
 		myJehannaBanner.enableNoWait()
 		myImperialBanner.disableNoWait()
@@ -99,18 +102,19 @@ function updateBanners(int i = -1)
 		EnableJehannaGuardArmorCrafting()
 	elseif(i == LCO.Imperial())
 		myDefaultBanner.disableNoWait()
+		DisableIcemothBoss()
 		myHoldBanner.disableNoWait()
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.enableNoWait()
 		myEastEmpireCompanyBanner.disableNoWait()
 	elseif(i == LCO.EastEmpireCompany())
 		myDefaultBanner.disableNoWait()
+		DisableIcemothBoss()
 		myHoldBanner.disableNoWait()
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.enableNoWait()
 	endIf
-	DisableIcemothBoss()
 endFunction
 
 ;-- Fort Icemoth Exclusives ---------------------------------------
@@ -126,15 +130,17 @@ ObjectReference Property FortIcemoth_WatcherMarker auto
 
 function DisableIcemothBoss()
 	IF thisLocation == FortIcemoth_HYORFortIcemothLocation
-		IF myDefaultBanner.IsEnabled()
-			FortIcemoth_Silas.enableNoWait()
-			FortIcemoth_SilasMinion.enableNoWait()
-			FortIcemoth_WatcherMarker.enableNoWait()
-		ELSEIF myDefaultBanner.IsDisabled()
-			FortIcemoth_Silas.disableNoWait()
-			FortIcemoth_SilasMinion.disableNoWait()
-			FortIcemoth_WatcherMarker.disableNoWait()
-		ENDIF
+		FortIcemoth_Silas.disableNoWait()
+		FortIcemoth_SilasMinion.disableNoWait()
+		FortIcemoth_WatcherMarker.disableNoWait()
+	ENDIF
+endFunction
+
+function EnableIcemothBoss()
+	IF thisLocation == FortIcemoth_HYORFortIcemothLocation
+		FortIcemoth_Silas.enableNoWait()
+		FortIcemoth_SilasMinion.enableNoWait()
+		FortIcemoth_WatcherMarker.enableNoWait()
 	ENDIF
 endFunction
 
