@@ -41,11 +41,6 @@ ObjectReference myJehannaBanner
 ObjectReference myImperialBanner
 ObjectReference myEastEmpireCompanyBanner
 
-Event OnLoad()
-	EastEmpireCompany = LCO.EastEmpireCompany()
-	parent.OnLoad()
-endEvent
-
 function getLocalBanners()
 	int i = Holds.find(myHold)
 	myDefaultBanner = Game.findClosestReferenceOfTypeFromRef(DefaultBanner, self, 400.0)
@@ -120,25 +115,25 @@ endFunction
 
 ;-- Fort Icemoth Exclusives ---------------------------------------
 
-Actor Property Silas auto
+Actor Property  FortIcemoth_Silas auto
 {Fort Icemoth Exclusive Property: Controls enabling and disabling the boss.}
-Actor Property SilasMinion auto
+Actor Property  FortIcemoth_SilasMinion auto
 {Fort Icemoth Exclusive Property: Controls enabling and disabling the boss minion.}
-Location Property HYORFortIcemothLocation auto
+Location Property  FortIcemoth_HYORFortIcemothLocation auto
 {Fort Icemoth Exclusive Property: Checks to make sure the current location is Fort Icemoth before running exclusive functions.}
-ObjectReference Property WatcherMarker auto
+ObjectReference Property FortIcemoth_WatcherMarker auto
 {Fort Icemoth Exclusive Property: Controls enabling and disabling the Watcher's body.} 
 
 function DisableIcemothBoss()
-	IF thisLocation == HYORFortIcemothLocation
-		IF myDefaultBanner.IsDisabled()
-			Silas.Disable()
-			SilasMinion.Disable()
-			WatcherMarker.Disable()
-		ELSEIF !myDefaultBanner.IsDisabled()
-			Silas.Enable()
-			SilasMinion.Enable()
-			WatcherMarker.Enable()
+	IF thisLocation == FortIcemoth_HYORFortIcemothLocation
+		IF myDefaultBanner.IsEnabled()
+			FortIcemoth_Silas.enableNoWait()
+			FortIcemoth_SilasMinion.enableNoWait()
+			FortIcemoth_WatcherMarker.enableNoWait()
+		ELSEIF myDefaultBanner.IsDisabled()
+			FortIcemoth_Silas.disableNoWait()
+			FortIcemoth_SilasMinion.disableNoWait()
+			FortIcemoth_WatcherMarker.disableNoWait()
 		ENDIF
 	ENDIF
 endFunction
@@ -146,8 +141,9 @@ endFunction
 ;-- Jehanna Support ---------------------------------------
 
 function EnableJehannaGuardArmorCrafting()
-	GlobalVariable JehannaArmorCraftable = Game.GetFormFromFile(0x0183C, "LCO_IliacBay.esp") as GlobalVariable
-	IF JehannaArmorCraftable.GetValue() < 1
-		JehannaArmorCraftable.SetValue(1)
+	GlobalVariable LCO_IB_CraftingEnable = Game.GetFormFromFile(0x0183C, "LCO_IliacBay.esp") as GlobalVariable
+	
+	IF LCO_IB_CraftingEnable.GetValue() < 1
+		LCO_IB_CraftingEnable.SetValue(1)
 	ENDIF
 endFunction
