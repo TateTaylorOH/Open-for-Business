@@ -24,8 +24,6 @@ LCO_SimpleController_HYOR Property claimScript Auto
 Faction Property LCO_HYOR_JehannaFaction_Dummy auto
 LeveledActor Property LCO_HYOR_LCharJehannaGuardFaces_Dummy auto
 
-Faction Property TG04EastEmpireFaction auto
-
 int GuardFormsAdded = 0
 
 Function JehannaSupport()
