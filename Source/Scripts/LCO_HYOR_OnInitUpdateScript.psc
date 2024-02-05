@@ -2,17 +2,12 @@ Scriptname LCO_HYOR_OnInitUpdateScript extends Quest
 {Controls patchless integration. This is a unique controller, do NOT reuse this script generically. If you are interested in adding claims for Jehanna it is recommended to simply master LCO_IliacBay.esp to your file.}
 
 EVENT OnInit()
-    LCO_HYORUpdater()	
+	LCO_HYORUpdater()	
 ENDEVENT
 
 Function LCO_HYORUpdater()
-	Faction LCO_IB_JehannaFaction = Game.GetFormFromFile(0x080C, "LCO_IliacBay.esp") as Faction
-
 	JehannaSupport()
     	EECArmorSupport()
-	IF TG04EastEmpireFaction.GetReaction(LCO_IB_JehannaFaction) == 2
-		TG04EastEmpireFaction.SetEnemy(LCO_IB_JehannaFaction, true, true)
-	ENDIF
 EndFunction
 
 ;-- Jehanna Support ---------------------------------------
@@ -55,6 +50,8 @@ Function JehannaSupport()
 		LCO_HYOR_LCharJehannaGuardFaces_Dummy.Revert() 
 		GuardFormsAdded = 0
 		LCO_HYOR_JehannaArmor.Revert()
+		LCO_HYOR_JehannaArmorNoHelmNoShield.Revert()
+		LCO_HYOR_JehannaWeapons.Revert()
     	endif
 endFunction
 
