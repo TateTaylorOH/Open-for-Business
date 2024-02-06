@@ -54,17 +54,22 @@ Function JehannaSupport()
 endFunction
 
 Function InjectJehannaItems()
-	LCO_HYOR_JehannaArmor.AddForm(Game.GetFormFromFile(0x0805, "LCO_IliacBay.esp"), 1, 1)
-	LCO_HYOR_JehannaArmor.AddForm(Game.GetFormFromFile(0x0806, "LCO_IliacBay.esp"), 1, 1)
-	LCO_HYOR_JehannaArmor.AddForm(Game.GetFormFromFile(0x0822, "LCO_IliacBay.esp"), 1, 1)
-	LCO_HYOR_JehannaArmor.AddForm(Game.GetFormFromFile(0x0824, "LCO_IliacBay.esp"), 1, 1)
-	LCO_HYOR_JehannaArmor.AddForm(Game.GetFormFromFile(0x0826, "LCO_IliacBay.esp"), 1, 1)
+	Armor LCO_IB_ArmorGuardCuirassJehanna = Game.GetFormFromFile(0x0805, "LCO_IliacBay.esp") as Armor
+	Armor LCO_IB_ArmorGuardShieldJehanna = Game.GetFormFromFile(0x0806, "LCO_IliacBay.esp") as Armor
+	Armor LCO_IB_ArmorGuardHelmetJehanna = Game.GetFormFromFile(0x0822, "LCO_IliacBay.esp") as Armor
+	Armor LCO_IBArmorGuardJehannaGauntlets = Game.GetFormFromFile(0x0824, "LCO_IliacBay.esp") as Armor
+	Armor LCO_IB_ArmorGuardJehannaBoots = Game.GetFormFromFile(0x0826, "LCO_IliacBay.esp") as Armor
+	Weapon LCO_IB_SteelSwordBreton = Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp") as Weapon
 
-	LCO_HYOR_JehannaArmorNoHelmNoShield.AddForm(Game.GetFormFromFile(0x0805, "LCO_IliacBay.esp"), 1, 1)
-	LCO_HYOR_JehannaArmorNoHelmNoShield.AddForm(Game.GetFormFromFile(0x0824, "LCO_IliacBay.esp"), 1, 1)
-	LCO_HYOR_JehannaArmorNoHelmNoShield.AddForm(Game.GetFormFromFile(0x0826, "LCO_IliacBay.esp"), 1, 1)
-
-	LCO_HYOR_JehannaWeapons.AddForm(Game.GetFormFromFile(0x080A, "LCO_IliacBay.esp"), 1, 1)
+	LCO_HYOR_JehannaArmor.AddForm(LCO_IB_ArmorGuardCuirassJehanna, 1, 1)
+	LCO_HYOR_JehannaArmor.AddForm(LCO_IB_ArmorGuardShieldJehanna, 1, 1)
+	LCO_HYOR_JehannaArmor.AddForm(LCO_IB_ArmorGuardHelmetJehanna, 1, 1)
+	LCO_HYOR_JehannaArmor.AddForm(LCO_IBArmorGuardJehannaGauntlets, 1, 1)
+	LCO_HYOR_JehannaArmor.AddForm(LCO_IB_ArmorGuardJehannaBoots, 1, 1)
+	LCO_HYOR_JehannaArmorNoHelmNoShield.AddForm(LCO_IB_ArmorGuardCuirassJehanna, 1, 1)
+	LCO_HYOR_JehannaArmorNoHelmNoShield.AddForm(LCO_IBArmorGuardJehannaGauntlets, 1, 1)
+	LCO_HYOR_JehannaArmorNoHelmNoShield.AddForm(LCO_IB_ArmorGuardJehannaBoots, 1, 1)
+	LCO_HYOR_JehannaWeapons.AddForm(LCO_IB_SteelSwordBreton, 1, 1)
 EndFunction
 
 ;-- East Empire Company Armor Support ---------------------------------------
@@ -74,13 +79,18 @@ LeveledItem Property LCO_HYOR_EECArmor auto
 bool EECInjected = false
 
 Function EECArmorSupport()
-	IF Game.GetFormFromFile(0x0801, "EastEmpireCompanyArmor.esp") as bool && EECInjected == false
-		LCO_HYOR_EECArmor.AddForm(Game.GetFormFromFile(0x0801, "EastEmpireCompanyArmor.esp"), 1, 1)
-		LCO_HYOR_EECArmor.AddForm(Game.GetFormFromFile(0x0807, "EastEmpireCompanyArmor.esp"), 1, 1)
-		LCO_HYOR_EECArmor.AddForm(Game.GetFormFromFile(0x0809, "EastEmpireCompanyArmor.esp"), 1, 1)
-		LCO_HYOR_EECArmor.AddForm(Game.GetFormFromFile(0x080B, "EastEmpireCompanyArmor.esp"), 1, 1)
+	Armor DES_EECArmorCuirass = Game.GetFormFromFile(0x0801, "EastEmpireCompanyArmor.esp") as Armor
+	Armor DES_EECHelmet = Game.GetFormFromFile(0x0807, "EastEmpireCompanyArmor.esp") as Armor
+	Armor DES_EECBoots = Game.GetFormFromFile(0x0809, "EastEmpireCompanyArmor.esp") as Armor
+	Armor DES_EECGauntlets = Game.GetFormFromFile(0x080B, "EastEmpireCompanyArmor.esp") as Armor
+	
+	IF DES_EECArmorCuirass as bool && EECInjected == false
+		LCO_HYOR_EECArmor.AddForm(DES_EECArmorCuirass, 1, 1)
+		LCO_HYOR_EECArmor.AddForm(DES_EECHelmet, 1, 1)
+		LCO_HYOR_EECArmor.AddForm(DES_EECBoots, 1, 1)
+		LCO_HYOR_EECArmor.AddForm(DES_EECGauntlets, 1, 1)
 		EECInjected = True
-	ELSEIF !Game.GetFormFromFile(0x0801, "EastEmpireCompanyArmor.esp") as bool && EECInjected == true
+	ELSEIF !DES_EECArmorCuirass as bool && EECInjected == true
 		LCO_HYOR_EECArmor.Revert()
 		EECInjected = false
 	ENDIF
