@@ -114,6 +114,7 @@ function updateBanners(int i = -1)
 		myJehannaBanner.disableNoWait()
 		myImperialBanner.disableNoWait()
 		myEastEmpireCompanyBanner.enableNoWait()
+		EnableEastEmpireArmorCrafting()
 	endIf
 endFunction
 
@@ -141,6 +142,16 @@ function EnableIcemothBoss()
 		FortIcemoth_Silas.enableNoWait()
 		FortIcemoth_SilasMinion.enableNoWait()
 		FortIcemoth_WatcherMarker.enableNoWait()
+	ENDIF
+endFunction
+
+;-- East Empire Company Armor Support ---------------------------------------
+
+function EnableEastEmpireArmorCrafting()
+	GlobalVariable DES_EECArmorCraftingEnable = Game.GetFormFromFile(0x0B2B, "EastEmpireCompanyArmory.esp") as GlobalVariable
+	
+	IF DES_EECArmorCraftingEnable.GetValue() < 1
+		DES_EECArmorCraftingEnable.SetValue(1)
 	ENDIF
 endFunction
 
