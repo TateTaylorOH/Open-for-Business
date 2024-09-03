@@ -14,7 +14,7 @@
       "match": {
         "formType": "Weapon",
         "formId": "Siege at Icemoth.esp|0xDBBC0"
-        }
+        },
       "assign": {
         "subType": "weapon_quarterstaff"
       }
