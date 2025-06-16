@@ -15,6 +15,14 @@
     {
       "refID": "Siege at Icemoth.esp|B0AD0", // Wreck of The Northern Grace (Original Marker: Shipwreck)
       "iconName": "ActualShipwreckMarker"
+    },
+    {
+      "refID": "Siege at Icemoth.esp|0xAE728", // Hjorkvild Isles (Worldspace Change)
+      "iconName": "TravelIconNWMarker"
+    },
+    {
+      "refID": "Siege at Icemoth.esp|0xAE727", // Skyrim (Worldspace Change)
+      "iconName": "TravelIconSEMarker"
     }
   ]
 }
